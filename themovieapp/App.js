@@ -11,7 +11,7 @@ export default function App() {
 
   DefaultThemePaper.colors.primary ='#1ae1f2';
   DarkThemePaper.colors.primary = '#1ae1f2';
-  DarkThemePaper.colors.accent = '1ae1f2';
+  DarkThemePaper.colors.accent = '#1ae1f2';
 
   DarkThemeNavigation.colors.background = '#192734';
   DarkThemeNavigation.colors.card = '#15212b';
