@@ -1,6 +1,7 @@
 import React from 'react';
 import { IconButton } from 'react-native-paper';
 import { createStackNavigator } from "@react-navigation/stack";
+
 import Home from "../screens/Home";
 import Movie from "../screens/Movie";
 import News from "../screens/News";

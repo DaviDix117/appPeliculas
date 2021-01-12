@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { StyleSheet, View } from 'react-native';
 import {DrawerContentScrollView} from '@react-navigation/drawer';
 import {Drawer, Switch, TouchableRipple, Text} from 'react-native-paper';
+
 import usePreference from "../hooks/usePreferences";
 
 export default function DrawerContent(props) {
