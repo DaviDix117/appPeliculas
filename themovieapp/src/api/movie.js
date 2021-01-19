@@ -12,19 +12,31 @@ export function getNewsMoviesApi(page = 1){
 
 //Obtener todos los géneros de películas clava
 export function getGenreMovieApi(idGenres) {
-    const url = `${API_HOST}genre/movie/list?api_key=${API_KEY}&language=${LANG}`;
-  
-    return fetch(url)
-      .then((response) => {
-        return response.json();
-      })
-      .then((result) => {
-        const arrayGenres = [];
-        idGenres.forEach((id) => {
-          result.genres.forEach((item) => {
-            if (item.id === id) arrayGenres.push(item.name);
-          });
+  const url = `${API_HOST}genre/movie/list?api_key=${API_KEY}&language=${LANG}`;
+
+  return fetch(url)
+    .then((response) => {
+      return response.json();
+    })
+    .then((result) => {
+      const arrayGenres = [];
+      idGenres.forEach((id) => {
+        result.genres.forEach((item) => {
+          if (item.id === id) arrayGenres.push(item.name);
         });
-        return arrayGenres;
       });
-  }
+      return arrayGenres;
+    });
+}
+
+export function getAllGenresApi() {
+  const url = `${API_HOST}genre/movie/list?api_key=${API_KEY}&language=${LANG}`
+
+  return fetch(url)
+    .then((response) => {
+      return response.json();
+    })
+    .then((result) => {
+      return result;
+    });
+}
