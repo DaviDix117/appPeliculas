@@ -1,5 +1,6 @@
 import { API_HOST,API_KEY,LANG } from "../utils/constants";
 
+//Obtener listado de nuevas películas
 export function getNewsMoviesApi(page = 1){
     const url = `${API_HOST}movie/now_playing?api_key=${API_KEY}&language=${LANG}&page=${page}`;
     
@@ -10,7 +11,7 @@ export function getNewsMoviesApi(page = 1){
     });
 }
 
-//Obtener todos los géneros de películas clava
+//Obtener los géneros de la película por su id - Carousel vertical
 export function getGenreMovieApi(idGenres) {
   const url = `${API_HOST}genre/movie/list?api_key=${API_KEY}&language=${LANG}`;
 
@@ -29,8 +30,35 @@ export function getGenreMovieApi(idGenres) {
     });
 }
 
+//Obtener los géneros de las películas
 export function getAllGenresApi() {
-  const url = `${API_HOST}genre/movie/list?api_key=${API_KEY}&language=${LANG}`
+  const url = `${API_HOST}genre/movie/list?api_key=${API_KEY}&language=${LANG}`;
+
+  return fetch(url)
+    .then((response) => {
+      return response.json();
+    })
+    .then((result) => {
+      return result;
+    });
+}
+
+//Obtener películas por género especifico
+export function getGenreMoviesApi(idGenres) {
+  const url = `${API_HOST}discover/movie?api_key=${API_KEY}&with_genres=${idGenres}&language=${LANG}`;
+  
+  return fetch(url)
+    .then((response) => {
+      return response.json();
+    })
+    .then((result) => {
+      return result;
+    });
+}
+
+//Obtener película y su info por id 
+export function getMoviebyIdApi(idMovie) {
+  const url = `${API_HOST}movie/${idMovie}?api_key=${API_KEY}&language=${LANG}`;
 
   return fetch(url)
     .then((response) => {

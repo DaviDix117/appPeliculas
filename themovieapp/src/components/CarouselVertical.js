@@ -24,7 +24,7 @@ export default function CarouselVertical(props) {
     )
 }
 
-//Funcion itinera las peliculas
+//Función itinera las películas
 function RenderItem(props){
     const { data, navigation } = props;
     const { id, title, poster_path, genre_ids } = data.item;
@@ -32,6 +32,7 @@ function RenderItem(props){
 
     const [genres, setGenres] = useState(null);
 
+    //Hook para guardar los géneros de la película
     useEffect(() => {
         getGenreMovieApi(genre_ids).then((response) => {
           setGenres(response);
