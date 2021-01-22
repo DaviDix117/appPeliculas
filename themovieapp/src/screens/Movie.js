@@ -1,10 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import { View, StyleSheet, ScrollView, ImageComponent, Image } from 'react-native';
 import { IconButton, Text, Title } from "react-native-paper";
+import { map } from "lodash";
+import { Rating } from "react-native-ratings";
 
 import { getMoviebyIdApi } from "../api/movie";
 import { BASE_PATH_IMG } from "../utils/constants";
+import usePreference from '../hooks/usePreferences'
 import ModalVideo from "../components/ModalVideo";
+import starDark from '../assets/png/starDark.png'
+import starLight from '../assets/png/starLight.png'
 
 export default function Movie(props) {
     const { route } = props;
@@ -25,9 +30,16 @@ export default function Movie(props) {
             <ScrollView>
                 <MovieImage posterPath={movie.poster_path} />
                 <MovieTrailer setShowVideo={setShowVideo} />
+                <MovieTitle movie={movie} />
+                <MovieRating voteAverage={movie.vote_average} voteCount={movie.vote_count} />
+                <Text style={styles.overview}>{movie.overview}</Text>
+                <Text style={[styles.overview, {marginBottom: 30}]}>
+                    Fecha de lanzamiento:  {movie.release_date}
+                </Text>
             </ScrollView>
 
-            <ModalVideo show={showVideo} setShow={setShowVideo} />
+            <ModalVideo show={showVideo} setShow={setShowVideo} idMovie={id} />
+
         </>
     );
 }
@@ -55,6 +67,50 @@ function MovieTrailer(props) {
             />
         </View>
     )
+}
+
+function MovieTitle(props) {
+    const {movie} = props;
+
+    return(
+        <View style={styles.viewInfo}>
+            <Title>{movie.title}</Title>
+            
+            <View style={styles.viewGenre} >
+                {map(movie.genres, (genre) =>(
+                    <Text key={genre.id} style={styles.genre} >
+                        {genre.name}
+                    </Text>
+                ))}
+            </View>
+        </View>
+    );
+}
+
+function MovieRating(props) {
+    const { voteCount, voteAverage } = props;
+    const media = voteAverage / 2;
+    const { theme } = usePreference();
+
+    if(voteAverage === undefined ) return null;
+
+    return(
+        <View style={styles.viewRating} >
+            <Rating 
+                type="custom"
+                ratingImage={theme === "dark" ? starDark : starLight}
+                ratingColor='#ffc205'
+                ratingBackgroundColor= {theme === "dark" ? '#192734' : '#f0f0f0'}
+                startingValue={media}
+                imageSize={20}
+                style={{marginRight: 15}}
+            />
+            <Text style={{fontSize: 16, marginRight: 5}} >{media}</Text>
+            <Text style={{fontSize: 12, color: '#8697a5'}} >
+                {voteCount} votos
+            </Text>
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
@@ -86,4 +142,27 @@ const styles = StyleSheet.create({
         borderRadius: 100,
         zIndex: 4
     },
+    viewInfo: {
+        marginHorizontal: 30,
+    },
+    viewGenre: {
+        flexDirection: 'row',
+    },
+    genre: {
+        marginRight: 10,
+        color: '#8697a5',
+    },
+    viewRating: {
+        marginHorizontal: 30,
+        marginTop: 10,
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    overview: {
+        marginHorizontal: 20,
+        marginTop: 20,
+        color: '#8697a5',
+        textAlign: 'justify',
+        fontSize: 18,
+    }
 });
