@@ -46,6 +46,7 @@ export default function Popular(props) {
                     mode='contained'
                     contentStyle={styles.loadMoreContained}
                     style={styles.loadMore}
+                    labelStyle={{ color: theme === "dark" ? '#fff' : '#000' }}
                     onPress={() => setPage(page + 1) } >
                     Cargar mas...
                 </Button>
