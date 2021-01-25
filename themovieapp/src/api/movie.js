@@ -95,3 +95,16 @@ export function getPopularMoviesApi(page = 1) {
     });
 
 }
+
+//Para buscar película por la pantalla search
+export function searchMoviesApi(search) {
+  const url = `${API_HOST}search/movie?api_key=${API_KEY}&language=${LANG}&query=${search}`;
+
+  return fetch(url)
+  .then((response) => {
+    return response.json();
+  })
+  .then((result) => {
+    return result;
+  });
+}
