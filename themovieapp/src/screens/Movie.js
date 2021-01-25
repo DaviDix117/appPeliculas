@@ -6,10 +6,10 @@ import { Rating } from "react-native-ratings";
 
 import { getMoviebyIdApi } from "../api/movie";
 import { BASE_PATH_IMG } from "../utils/constants";
-import usePreference from '../hooks/usePreferences'
+import usePreference from '../hooks/usePreferences';
 import ModalVideo from "../components/ModalVideo";
-import starDark from '../assets/png/starDark.png'
-import starLight from '../assets/png/starLight.png'
+import starDark from '../assets/png/starDark.png';
+import starLight from '../assets/png/starLight.png';
 
 export default function Movie(props) {
     const { route } = props;
@@ -97,6 +97,7 @@ function MovieRating(props) {
     return(
         <View style={styles.viewRating} >
             <Rating 
+                readonly={true}
                 type="custom"
                 ratingImage={theme === "dark" ? starDark : starLight}
                 ratingColor='#ffc205'

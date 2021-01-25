@@ -69,6 +69,7 @@ export function getMoviebyIdApi(idMovie) {
     });
 }
 
+//Obtener el trailer asociado a la película
 export function getVideoMovieId(idMovie) {
   const url = `${API_HOST}movie/${idMovie}/videos?api_key=${API_KEY}&language=${LANG}`;
  
@@ -79,4 +80,18 @@ export function getVideoMovieId(idMovie) {
     .then((result) => {
       return result;
     });
+}
+
+//Obtener listado de películas populares
+export function getPopularMoviesApi(page = 1) {
+  const url = `${API_HOST}movie/popular?api_key=${API_KEY}&language=${LANG}&page=${page}`;
+
+  return fetch(url)
+    .then((response) => {
+      return response.json();
+    })
+    .then((result) => {
+      return result;
+    });
+
 }
