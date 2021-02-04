@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { StatusBar } from "react-native";
 import { Provider as PaperProvider, DarkTheme as DarkThemePaper, DefaultTheme as DefaultThemePaper } from 'react-native-paper';
 import { NavigationContainer, DarkTheme as DarkThemeNavigation, DefaultTheme as DefaultThemeNavigation } from "@react-navigation/native";
+
 import Navigation from "./src/navigation/Navigation";
 import PreferencesContext from "./src/context/PreferencesContext";
 
